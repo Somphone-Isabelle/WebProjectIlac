@@ -1,3 +1,4 @@
 # WebProjectIlac
 
-Live demo: https://Somphone-Isabelle.github.io/vue-character-viewer/
+Live demo link:
+https://Somphone-Isabelle.github.io/WebProjectIlac/
