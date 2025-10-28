@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blond characters in HSR</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+
+<body>
+
+    <header>
+        <img src="https://s.yimg.com/ny/api/res/1.2/WI.qdtBF7orSciWmyNL3mQ--/YXBwaWQ9aGlnaGxhbmRlcjt3PTEyMDA7aD02NzU-/https://media.zenfs.com/en/bgr_208/2a3a23b6e253404d3530070fa7355a4a"
+            alt="Bannière des personnages blonds">
+    </header>
+
+    <main id="app">
+        <div class="card">
+            <img :src="currentItem.img" alt="Character image" class="character-img">
+
+            <div class="content">
+                <h2 v-if="showTitle">{{ currentItem.title }}</h2>
+                <p v-else>{{ currentItem.desc }}</p>
+            </div>
+
+            <div class="buttons">
+                <button @click="prevItem">Previous</button>
+                <button @click="toggleInfo">
+                    {{ showTitle ? "Show Description" : "Show Title" }}
+                </button>
+                <button @click="nextItem">Next</button>
+            </div>
+        </div>
+    </main>
+
+    <script src="data/data.js"></script>
+
+    <script>
+        const { createApp } = Vue;
+
+        createApp({
+            data() {
+                return {
+                    items: data,
+                    index: 0,
+                    showTitle: true
+                };
+            },
+            computed: {
+                currentItem() {
+                    return this.items[this.index];
+                }
+            },
+            methods: {
+                nextItem() {
+                    this.index = (this.index + 1) % this.items.length;
+                    this.showTitle = true;
+                },
+                prevItem() {
+                    this.index = (this.index - 1 + this.items.length) % this.items.length;
+                    this.showTitle = true;
+                },
+                toggleInfo() {
+                    this.showTitle = !this.showTitle;
+                }
+            }
+        }).mount("#app");
+    </script>
+</body>
+
+</html>
